@@ -78,8 +78,7 @@ cd $PATHBASE
 # Download Odoo from git source
 sudo git clone https://github.com/odoo/odoo.git -b $VERSION --depth $DEPTH $PATHBASE/$VERSION/odoo
 ####sudo git clone https://github.com/odooerpdevelopers/backend_theme.git -b $VERSION --depth $DEPTH $PATHREPOS/backend_theme
-# ATENCION temporalmente dejamos la 13.0 dado que aun no existe el repo para v14, de este solo necesitamos el modulo web_responsive para
-# instalar el modulo del backend_theme_v13 (atencion, esto es opcional)
+# ATENCION temporalmente dejamos la 14.0 dado que aun no existe el repo para v15, de este solo necesitamos el modulo web_responsive para
 sudo git clone https://github.com/oca/web.git -b 14.0 --depth $DEPTH $PATHREPOS_OCA/web
 
 
@@ -344,7 +343,7 @@ systemctl status odoo15" | sudo tee --append $PATHBASE/scripts/status
 sudo chmod +x $PATHBASE/scripts/status
 
 
-#tlog
+#status
 sudo touch $PATHBASE/scripts/tlog
 echo "#!/bin/bash
 truncate -s 0 /opt/odoo15/log/odoo15-server.log" | sudo tee --append $PATHBASE/scripts/tlog
