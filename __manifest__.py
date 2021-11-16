@@ -25,14 +25,13 @@
 	'author': 'Pronexo',
 	'license': 'AGPL-3',
 	'maintainer': 'Pronexo',
+	'images': ['static/description/install_odoo_home.png'],
 	'category': 'Extra Tools',
-        'website': 'https://www.pronexo.com',
-	'external_dependencies': {
-   
-    },
+    'website': 'https://www.pronexo.com',
+    'depends': ['base'],
 	'auto_install': False,
 	'installable': True,
 	'price': 0,
-        'currency': 'USD',
-        'images': ['static/description/install_odoo_home.png']
+    'currency': 'USD'
+       
 }
