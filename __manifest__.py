@@ -22,8 +22,8 @@
 	'summary': 'Script that installs Odoo for production',
 	'description': 'Script that installs Odoo for production in just 2 minutes with all your libraries in a single folder',
 	'version': '15.0.1.0',
-	'author': "Pronexo",
-	'license': "AGPL-3",
+	'author': 'Pronexo',
+	'license': 'AGPL-3',
 	'maintainer': 'Pronexo',
 	'category': 'Extra Tools',
         'website': 'https://www.pronexo.com',
@@ -34,6 +34,5 @@
 	'installable': True,
 	'price': 0,
         'currency': 'USD',
-        'images': ['images/pos-proxy-service-home.png'],
-        'live_test_url': 'https://www.youtube.com/watch?v=SKFlc8bKZAI'
+        'images': ['static/description/install_odoo_home.png']
 }
