@@ -20,10 +20,10 @@
 #
 ##############################################################################
 # AVISO IMPORTANTE!!! 
-# 2GB DE RAM
+# ASEGURESE DE TENER UN SERVIDOR / VPS CON AL MENOS > 2GB DE RAM
 # Ubuntu 20.04 LTS tested
-# v2.8
-# Last updated: 2021-18-10
+# v2.5
+# Last updated: 2021-18-03
 
 OS_NAME=$(lsb_release -cs)
 usuario=$USER
@@ -41,16 +41,16 @@ PATHREPOS_OCA=$PATHREPOS/oca
 if [[ $OS_NAME == "disco" ]];
 
 then
-        echo $OS_NAME
-        OS_NAME="bionic"
+	echo $OS_NAME
+	OS_NAME="bionic"
 
 fi
 
 if [[ $OS_NAME == "focal" ]];
 
 then
-        echo $OS_NAME
-        OS_NAME="bionic"
+	echo $OS_NAME
+	OS_NAME="bionic"
 
 fi
 
@@ -75,8 +75,11 @@ sudo mkdir $PATHREPOS
 sudo mkdir $PATHREPOS_OCA
 sudo mkdir $PATH_LOG
 cd $PATHBASE
-
+# Download Odoo from git source
 sudo git clone https://github.com/odoo/odoo.git -b $VERSION --depth $DEPTH $PATHBASE/$VERSION/odoo
+####sudo git clone https://github.com/odooerpdevelopers/backend_theme.git -b $VERSION --depth $DEPTH $PATHREPOS/backend_theme
+# ATENCION temporalmente dejamos la 13.0 dado que aun no existe el repo para v14, de este solo necesitamos el modulo web_responsive para
+# instalar el modulo del backend_theme_v13 (atencion, esto es opcional)
 sudo git clone https://github.com/oca/web.git -b 14.0 --depth $DEPTH $PATHREPOS_OCA/web
 
 
@@ -102,9 +105,9 @@ sudo rm $PATHBASE/wkhtmltox*.deb
 if [[ "`getconf LONG_BIT`" == "32" ]];
 
 then
-        sudo wget $wk32
+	sudo wget $wk32
 else
-        sudo wget $wk64
+	sudo wget $wk64
 fi
 
 sudo dpkg -i --force-depends wkhtmltox_0.12.5-1*.deb
@@ -127,7 +130,6 @@ cd $DIR_PATH
 sudo mkdir $PATHBASE/config
 sudo rm $PATHBASE/config/odoo$VCODE.conf
 sudo touch $PATHBASE/config/odoo$VCODE.conf
-
 echo "
 [options]
 ; This is the password that allows database operations:
@@ -174,6 +176,7 @@ WantedBy=multi-user.target
 sudo systemctl daemon-reload
 sudo systemctl enable odoo$VCODE.service
 sudo systemctl start odoo$VCODE
+
 
 echo "Instalando nginx"
 sudo apt-get -y install nginx
@@ -251,7 +254,11 @@ server {
         client_header_buffer_size 4k;
         large_client_header_buffers 4 64k;
         client_max_body_size 0;
-	# Redirect longpoll requests to odoo longpolling port
+
+
+        
+
+        # Redirect longpoll requests to odoo longpolling port
         location /longpolling {
                  proxy_pass http://odoochat;
         }
@@ -260,7 +267,7 @@ server {
         location / {
                 proxy_pass http://odoo;
                 proxy_redirect off;
-
+             
         }
 
 
@@ -279,7 +286,7 @@ server {
         proxy_pass    http://127.0.0.1:$PORT;
         }
 
-
+       
 
 
 }' > /etc/nginx/sites-enabled/odoo.host" | sudo tee --append $PATHBASE/scripts/nginx-odoo-host.sh
@@ -301,7 +308,7 @@ sudo chmod +x $PATHBASE/scripts/log
 #pconf
 sudo touch $PATHBASE/scripts/pconf
 echo "#!/bin/bash
-
+  
 if [[ ! -f "/etc/postgresql/12/main/pg_hba.conf.bak" ]]
 then
     sudo cp /etc/postgresql/12/main/pg_hba.conf /etc/postgresql/12/main/pg_hba.conf.bak
@@ -316,21 +323,22 @@ sudo chmod +x $PATHBASE/scripts/pconf
 sudo touch $PATHBASE/scripts/restart
 echo "#!/bin/bash
 truncate -s 0 /opt/odoo14/log/odoo14-server.log
-sudo systemctl restart odoo14
-date" | sudo tee --append $PATHBASE/scripts/restart
+systemctl restart odoo14" | sudo tee --append $PATHBASE/scripts/restart
 sudo chmod +x $PATHBASE/scripts/restart
 
 
 #start
 sudo touch $PATHBASE/scripts/start
 echo "#!/bin/bash
-sudo systemctl start odoo14" | sudo tee --append $PATHBASE/scripts/start
+systemctl start odoo14" | sudo tee --append $PATHBASE/scripts/start
 sudo chmod +x $PATHBASE/scripts/start
+
+
 
 #stop
 sudo touch $PATHBASE/scripts/stop
 echo "#!/bin/bash
-sudo systemctl stop odoo14" | sudo tee --append $PATHBASE/scripts/stop
+systemctl stop odoo14" | sudo tee --append $PATHBASE/scripts/stop
 sudo chmod +x $PATHBASE/scripts/stop
 
 
@@ -359,7 +367,7 @@ sudo cp $PATHBASE/scripts/* /usr/bin/
 
 sudo chown -R $usuario: $PATHBASE
 
-echo "Odoo $VERSION Todo Listo!!!) Tested by: Pronexo Team ;)"
+echo "Odoo $VERSION Installation has finished!! ;) by pronexo.com"
 IP=$(ip route get 8.8.8.8 | head -1 | cut -d' ' -f7)
-echo "Puedes acceder desde: http://$IP:$PORT  or http://localhost:$PORT"
+echo "You can access from: http://$IP:$PORT  or http://localhost:$PORT"
 
