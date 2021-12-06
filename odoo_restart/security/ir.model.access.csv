@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_odoo_restart,odoo.restart,model_odoo_restart,,1,1,1,1
+access_odoo_restart_history,odoo.restart.history,model_odoo_restart_history,,1,1,1,1
+access_odoo_restart_warning_box,warning_box,model_warning_box,,1,1,1,1
