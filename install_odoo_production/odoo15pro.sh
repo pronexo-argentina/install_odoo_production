@@ -22,8 +22,8 @@
 # AVISO IMPORTANTE!!! 
 # ASEGURESE DE TENER UN SERVIDOR / VPS CON AL MENOS > 2GB DE RAM
 # Ubuntu 20.04 LTS tested
-# v2.6
-# Last updated: 2021-25-08
+# v2.7
+# Last updated: 2021-29-12
 
 OS_NAME=$(lsb_release -cs)
 usuario=$USER
@@ -41,21 +41,29 @@ PATHREPOS_OCA=$PATHREPOS/oca
 if [[ $OS_NAME == "disco" ]];
 
 then
-        echo $OS_NAME
-        OS_NAME="bionic"
+    echo $OS_NAME
+    OS_NAME="bionic"
+
+fi
+
+if [[ $OS_NAME == "buster" ]];
+
+then
+    echo $OS_NAME
+    OS_NAME="buster"
 
 fi
 
 if [[ $OS_NAME == "focal" ]];
 
 then
-        echo $OS_NAME
-        OS_NAME="bionic"
+    echo $OS_NAME
+    OS_NAME="focal"
 
 fi
 
-wk64="https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.5/wkhtmltox_0.12.5-1."$OS_NAME"_amd64.deb"
-wk32="https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.5/wkhtmltox_0.12.5-1."$OS_NAME"_i386.deb"
+wk64="https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox_0.12.6-1."$OS_NAME"_amd64.deb"
+wk32="https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox_0.12.6-1."$OS_NAME"_i386.deb"
 
 sudo adduser --system --quiet --shell=/bin/bash --home=$PATHBASE --gecos 'ODOO' --group $usuario
 sudo adduser $usuario sudo
@@ -65,8 +73,12 @@ sudo add-apt-repository universe
 sudo apt-get update
 sudo apt-get upgrade
 sudo apt-get install -y git
+
 # Update and install Postgresql
-sudo apt-get install postgresql -y
+sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
+wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+sudo apt-get update
+sudo apt-get -y install postgresql-14
 sudo  -u postgres  createuser -s $usuario
 
 sudo mkdir $PATHBASE
@@ -79,7 +91,7 @@ cd $PATHBASE
 sudo git clone https://github.com/odoo/odoo.git -b $VERSION --depth $DEPTH $PATHBASE/$VERSION/odoo
 ####sudo git clone https://github.com/odooerpdevelopers/backend_theme.git -b $VERSION --depth $DEPTH $PATHREPOS/backend_theme
 # ATENCION temporalmente dejamos la 14.0 dado que aun no existe el repo para v15, de este solo necesitamos el modulo web_responsive para
-sudo git clone https://github.com/oca/web.git -b 14.0 --depth $DEPTH $PATHREPOS_OCA/web
+sudo git clone https://github.com/oca/web.git -b 15.0 --depth $DEPTH $PATHREPOS_OCA/web
 
 
 # Install python3 and dependencies for Odoo
@@ -87,7 +99,7 @@ sudo apt-get -y install gcc python3-dev libxml2-dev libxslt1-dev \
  libevent-dev libsasl2-dev libldap2-dev libpq-dev \
  libpng-dev libjpeg-dev xfonts-base xfonts-75dpi
 
-sudo apt-get -y install python3 python3-pip python3-setuptools htop
+sudo apt-get -y install python3 python3-pip python3-setuptools htop zip unzip python3-lxml python3-vatnumber
 sudo pip3 install virtualenv
 
 # FIX wkhtml* dependencie Ubuntu Server 18.04
