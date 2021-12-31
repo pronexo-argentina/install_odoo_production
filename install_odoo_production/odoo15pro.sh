@@ -316,11 +316,11 @@ sudo chmod +x $PATHBASE/scripts/log
 sudo touch $PATHBASE/scripts/pconf
 echo "#!/bin/bash
 
-if [[ ! -f "/etc/postgresql/12/main/pg_hba.conf.bak" ]]
+if [[ ! -f "/etc/postgresql/14/main/pg_hba.conf.bak" ]]
 then
-    sudo cp /etc/postgresql/12/main/pg_hba.conf /etc/postgresql/12/main/pg_hba.conf.bak
+    sudo cp /etc/postgresql/14/main/pg_hba.conf /etc/postgresql/14/main/pg_hba.conf.bak
 fi
-sudo vim /etc/postgresql/12/main/pg_hba.conf
+sudo vim /etc/postgresql/14/main/pg_hba.conf
 
 sudo /etc/init.d/postgresql restart" | sudo tee --append $PATHBASE/scripts/pconf
 sudo chmod +x $PATHBASE/scripts/pconf
