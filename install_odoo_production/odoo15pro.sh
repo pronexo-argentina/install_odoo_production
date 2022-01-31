@@ -102,8 +102,8 @@ sudo apt-get -y install gcc python3-dev libxml2-dev libxslt1-dev \
 sudo apt-get -y install python3 python3-pip python3-setuptools htop zip unzip python3-lxml python3-vatnumber
 sudo pip3 install virtualenv
 
-# FIX wkhtml* dependencie Ubuntu Server 18.04
-sudo apt-get -y install libxrender1
+# FIX wkhtml* dependencie Ubuntu Server 20.04.3 LTS
+sudo apt-get -y install libxrender1 fontconfig
 
 # Install nodejs and less
 sudo apt-get install -y npm node-less
