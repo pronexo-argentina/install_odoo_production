@@ -22,8 +22,8 @@
 # AVISO IMPORTANTE!!! 
 # ASEGURESE DE TENER UN SERVIDOR / VPS CON AL MENOS > 2GB DE RAM
 # Ubuntu 18.04 LTS tested
-# v2.3
-# Last updated: 2020-07-19
+# v2.4
+# Last updated: 2022-02-23
 ##############################################################################
 
 OS_NAME=$(lsb_release -cs)
