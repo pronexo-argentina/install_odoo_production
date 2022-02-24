@@ -64,7 +64,7 @@ sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)
 wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
 sudo apt-get update
 sudo apt-get install postgresql-14 -y
-sudo su - postgres -c "createuser -s $usuario"
+sudo  -u postgres  createuser -s $usuario
 
 sudo mkdir $PATHBASE
 sudo mkdir $PATHBASE/$VERSION
