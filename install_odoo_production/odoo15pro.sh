@@ -22,8 +22,8 @@
 # AVISO IMPORTANTE!!! 
 # ASEGURESE DE TENER UN SERVIDOR / VPS CON AL MENOS > 2GB DE RAM
 # Ubuntu 20.04 LTS tested
-# v2.7
-# Last updated: 2021-29-12
+# v2.7.1
+# Last updated: 2022-07-03
 
 OS_NAME=$(lsb_release -cs)
 usuario=$USER
@@ -215,10 +215,10 @@ sudo rm /etc/nginx/sites-enabled/default
 cd /etc/nginx/sites-enabled/
 sudo ln -s /etc/nginx/sites-available/odoo.host odoo.host
 echo '
-upstream odoo {
+upstream odoo.pronexo.com {
  server 127.0.0.1:$PORT;
 }
-upstream odoochat {
+upstream odoochat.pronexo.com {
  server 127.0.0.1:8072;
 }
 
@@ -227,7 +227,7 @@ server {
         #listen [::]:80 default_server;
 
 
-        server_name _;
+        server_name odoo.pronexo.com;
         proxy_buffers 16 64k;
         proxy_buffer_size 128k;
         proxy_read_timeout 900s;
@@ -267,12 +267,12 @@ server {
         client_max_body_size 0;
 # Redirect longpoll requests to odoo longpolling port
         location /longpolling {
-                 proxy_pass http://odoochat;
+                 proxy_pass http://odoochat.pronexo.com;
         }
         # Redirect requests to odoo backend server
 
         location / {
-                proxy_pass http://odoo;
+                proxy_pass http://odoo.pronexo.com;
                 proxy_redirect off;
 
         }
