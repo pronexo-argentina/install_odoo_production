@@ -22,8 +22,8 @@
 # AVISO IMPORTANTE!!! 
 # ASEGURESE DE TENER UN SERVIDOR / VPS CON AL MENOS > 2GB DE RAM
 # Ubuntu 20.04 LTS tested
-# v2.5
-# Last updated: 2021-18-03
+# v2.6
+# Last updated: 2022-03-05
 
 OS_NAME=$(lsb_release -cs)
 usuario=$USER
@@ -65,8 +65,12 @@ sudo add-apt-repository universe
 sudo apt-get update
 sudo apt-get upgrade
 sudo apt-get install -y git
+
 # Update and install Postgresql
-sudo apt-get install postgresql -y
+sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
+wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+sudo apt-get update
+sudo apt-get -y install postgresql-14
 sudo  -u postgres  createuser -s $usuario
 
 sudo mkdir $PATHBASE
@@ -309,11 +313,11 @@ sudo chmod +x $PATHBASE/scripts/log
 sudo touch $PATHBASE/scripts/pconf
 echo "#!/bin/bash
   
-if [[ ! -f "/etc/postgresql/12/main/pg_hba.conf.bak" ]]
+if [[ ! -f "/etc/postgresql/14/main/pg_hba.conf.bak" ]]
 then
-    sudo cp /etc/postgresql/12/main/pg_hba.conf /etc/postgresql/12/main/pg_hba.conf.bak
+    sudo cp /etc/postgresql/14/main/pg_hba.conf /etc/postgresql/14/main/pg_hba.conf.bak
 fi
-sudo vim /etc/postgresql/12/main/pg_hba.conf
+sudo vim /etc/postgresql/14/main/pg_hba.conf
 
 sudo /etc/init.d/postgresql restart" | sudo tee --append $PATHBASE/scripts/pconf
 sudo chmod +x $PATHBASE/scripts/pconf
