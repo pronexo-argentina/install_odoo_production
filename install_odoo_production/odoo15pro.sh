@@ -121,7 +121,7 @@ else
         sudo wget $wk64
 fi
 
-sudo dpkg -i --force-depends wkhtmltox_0.12.5-1*.deb
+sudo dpkg -i --force-depends wkhtmltox_0.12.6-1*.deb
 sudo apt-get -f -y install
 sudo ln -s /usr/local/bin/wkhtml* /usr/bin
 sudo rm $PATHBASE/wkhtmltox*.deb
