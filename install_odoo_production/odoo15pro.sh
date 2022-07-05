@@ -62,7 +62,8 @@ then
 
 fi
 
-wk64="https://github.com/wkhtmltopdf/packaging/releases/0.12.6-1/wkhtmltox_0.12.6-1."$OS_NAME"_amd64.deb"
+wk64="https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox_0.12.6-1."$OS_NAME"_amd64.deb"
+#wk64="https://github.com/wkhtmltopdf/packaging/releases/0.12.6-1/wkhtmltox_0.12.6-1."$OS_NAME"_amd64.deb"
 wk32="https://github.com/wkhtmltopdf/packaging/releases/0.12.6-1/wkhtmltox_0.12.6-1."$OS_NAME"_i386.deb"
 
 sudo adduser --system --quiet --shell=/bin/bash --home=$PATHBASE --gecos 'ODOO' --group $usuario
