@@ -21,7 +21,7 @@
 	'name': 'Install Odoo Script',
 	'summary': 'Script that installs Odoo for production',
 	'description': 'Script that installs Odoo for production in just 2 minutes with all your libraries in a single folder',
-	'version': '15.0.3.0',
+	'version': '16.0.3.0',
 	'author': 'Pronexo',
 	'license': 'AGPL-3',
 	'maintainer': 'Pronexo',

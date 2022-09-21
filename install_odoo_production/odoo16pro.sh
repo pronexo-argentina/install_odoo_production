@@ -22,17 +22,17 @@
 # AVISO IMPORTANTE!!! 
 # ASEGURESE DE TENER UN SERVIDOR / VPS CON AL MENOS > 2GB DE RAM
 # Ubuntu 20.04 LTS tested
-# v2.7.1
-# Last updated: 2022-07-03
+# v1.0.0
+# Last updated: 2022-09-21
 
 OS_NAME=$(lsb_release -cs)
 usuario=$USER
 DIR_PATH=$(pwd)
-VCODE=15
-VERSION=15.0
-PORT=1569
+VCODE=16
+VERSION=16.0
+PORT=1669
 DEPTH=1
-PROJECT_NAME=odoo15
+PROJECT_NAME=odoo16
 PATHBASE=/opt/$PROJECT_NAME
 PATH_LOG=$PATHBASE/log
 PATHREPOS=$PATHBASE/$VERSION/extra-addons
@@ -91,8 +91,8 @@ cd $PATHBASE
 # Download Odoo from git source
 sudo git clone https://github.com/odoo/odoo.git -b $VERSION --depth $DEPTH $PATHBASE/$VERSION/odoo
 ####sudo git clone https://github.com/odooerpdevelopers/backend_theme.git -b $VERSION --depth $DEPTH $PATHREPOS/backend_theme
-# ATENCION temporalmente dejamos la 14.0 dado que aun no existe el repo para v15, de este solo necesitamos el modulo web_responsive para
-sudo git clone https://github.com/oca/web.git -b 15.0 --depth $DEPTH $PATHREPOS_OCA/web
+# ATENCION temporalmente dejamos la 14.0 dado que aun no existe el repo para v16, de este solo necesitamos el modulo web_responsive para
+sudo git clone https://github.com/oca/web.git -b 16.0 --depth $DEPTH $PATHREPOS_OCA/web
 
 
 # Install python3 and dependencies for Odoo
@@ -304,13 +304,13 @@ sudo sh $PATHBASE/scripts/nginx-odoo-host.sh
 #econf
 sudo touch $PATHBASE/scripts/econf
 echo "#!/bin/bash
-vim /opt/odoo15/config/odoo15.conf" | sudo tee --append $PATHBASE/scripts/econf
+vim /opt/odoo16/config/odoo16.conf" | sudo tee --append $PATHBASE/scripts/econf
 sudo chmod +x $PATHBASE/scripts/econf
 
 #log
 sudo touch $PATHBASE/scripts/log
 echo "#!/bin/bash
-cat /opt/odoo15/log/odoo15-server.log" | sudo tee --append $PATHBASE/scripts/log
+cat /opt/odoo16/log/odoo16-server.log" | sudo tee --append $PATHBASE/scripts/log
 sudo chmod +x $PATHBASE/scripts/log
 
 #pconf
@@ -330,8 +330,8 @@ sudo chmod +x $PATHBASE/scripts/pconf
 #restart
 sudo touch $PATHBASE/scripts/restart
 echo "#!/bin/bash
-truncate -s 0 /opt/odoo15/log/odoo15-server.log
-sudo systemctl restart odoo15
+truncate -s 0 /opt/odoo16/log/odoo16-server.log
+sudo systemctl restart odoo16
 date" | sudo tee --append $PATHBASE/scripts/restart
 sudo chmod +x $PATHBASE/scripts/restart
 
@@ -339,27 +339,27 @@ sudo chmod +x $PATHBASE/scripts/restart
 #start
 sudo touch $PATHBASE/scripts/start
 echo "#!/bin/bash
-sudo systemctl start odoo15" | sudo tee --append $PATHBASE/scripts/start
+sudo systemctl start odoo16" | sudo tee --append $PATHBASE/scripts/start
 sudo chmod +x $PATHBASE/scripts/start
 
 #stop
 sudo touch $PATHBASE/scripts/stop
 echo "#!/bin/bash
-sudo systemctl stop odoo15" | sudo tee --append $PATHBASE/scripts/stop
+sudo systemctl stop odoo16" | sudo tee --append $PATHBASE/scripts/stop
 sudo chmod +x $PATHBASE/scripts/stop
 
 
 #status
 sudo touch $PATHBASE/scripts/status
 echo "#!/bin/bash
-systemctl status odoo15" | sudo tee --append $PATHBASE/scripts/status
+systemctl status odoo16" | sudo tee --append $PATHBASE/scripts/status
 sudo chmod +x $PATHBASE/scripts/status
 
 
 #status
 sudo touch $PATHBASE/scripts/tlog
 echo "#!/bin/bash
-truncate -s 0 /opt/odoo15/log/odoo15-server.log" | sudo tee --append $PATHBASE/scripts/tlog
+truncate -s 0 /opt/odoo16/log/odoo16-server.log" | sudo tee --append $PATHBASE/scripts/tlog
 sudo chmod +x $PATHBASE/scripts/tlog
 
 
