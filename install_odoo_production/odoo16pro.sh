@@ -21,9 +21,9 @@
 ##############################################################################
 # AVISO IMPORTANTE!!! 
 # ASEGURESE DE TENER UN SERVIDOR / VPS CON AL MENOS > 2GB DE RAM
-# Ubuntu 20.04 LTS tested
-# v1.0.0
-# Last updated: 2022-09-21
+# Ubuntu 18.04, 20.04 LTS, Ubuntu 22.04 LTS, Debian 10, Debian 11
+# v3.4
+# Last updated: 2022-11-08
 
 OS_NAME=$(lsb_release -cs)
 usuario=$USER
@@ -38,33 +38,37 @@ PATH_LOG=$PATHBASE/log
 PATHREPOS=$PATHBASE/$VERSION/extra-addons
 PATHREPOS_OCA=$PATHREPOS/oca
 
-if [[ $OS_NAME == "disco" ]];
+wk64=""
+wk32=""
+
+
+if [[ $OS_NAME == "jammy" ]];
 
 then
-    echo $OS_NAME
-    OS_NAME="bionic"
-
-fi
-
-if [[ $OS_NAME == "buster" ]];
-
-then
-    echo $OS_NAME
-    OS_NAME="buster"
-
-fi
-
-if [[ $OS_NAME == "focal" ]];
-
-then
-    echo $OS_NAME
-    OS_NAME="focal"
+	wk64="https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6.1-2/wkhtmltox_0.12.6.1-2.jammy_amd64.deb"
 
 fi
 
 
-wk64="https://github.com/wkhtmltopdf/packaging/releases/0.12.6-1/wkhtmltox_0.12.6-1."$OS_NAME"_amd64.deb"
-wk32="https://github.com/wkhtmltopdf/packaging/releases/0.12.6-1/wkhtmltox_0.12.6-1."$OS_NAME"_i386.deb"
+
+if [[ $OS_NAME == "buster"  ||  $OS_NAME == "bionic" || $OS_NAME == "focal" ]];
+
+then
+	wk64="https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox_0.12.6-1."$OS_NAME"_amd64.deb"
+	wk32="https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox_0.12.6-1."$OS_NAME"_i386.deb"
+
+fi
+
+
+if [[ $OS_NAME == "bullseye" ]];
+
+then
+	wk64="https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6.1-2/wkhtmltox_0.12.6.1-2."$OS_NAME"_amd64.deb"
+	wk32="https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6.1-2/wkhtmltox_0.12.6.1-2."$OS_NAME"_i386.deb"
+fi
+
+
+echo $wk64
 
 sudo adduser --system --quiet --shell=/bin/bash --home=$PATHBASE --gecos 'ODOO' --group $usuario
 sudo adduser $usuario sudo
