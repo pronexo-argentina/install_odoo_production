@@ -1,5 +1,5 @@
 #!/bin/bash
-# v.20220803 pronexo.com
+# v.20221108 pronexo.com
 
 # CONST 1GB
 
@@ -20,14 +20,6 @@ CMD_H=0
 # VARIABLE IS VERBOSE
 
 CMD_V=0
-
-# install libs
-
-if ! [ -x "$(command -v bc)" ]; then
-  echo 'Error: bc is not installed. >>>> installing bc.....' >&2
-  sudo apt update && sudo apt install -y bc
-  # exit 1
-fi
 
 # FUNCTIONS
 
@@ -106,6 +98,7 @@ h() {
   echo "   -v    Verbose"
   echo "   -w    Set static workers number"
 }
+
 c() {
   echo "workers = $(calculateWorkers)"
   echo "limit_memory_hard = $(calculateLimitMemoryHard)"
