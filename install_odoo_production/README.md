@@ -1,4 +1,4 @@
-<img alt="Odoo by pronexo.com" src="https://fotos.subefotos.com/cf6f8e00b019f98f3d4bbb8df0258539o.png" />
+<img alt="Odoo by pronexo.com" src="https://i.postimg.cc/5NMNVbTB/Pro-Nexo-Logo2021-2-git.png" />
 pronexo.com - https://www.pronexo.com
 
 # install-odoo-scripts
