@@ -22,38 +22,10 @@
 # AVISO IMPORTANTE!!! 
 # ASEGURESE DE TENER UN SERVIDOR / VPS CON AL MENOS > 2GB DE RAM
 # Ubuntu 18.04 LTS tested
-# v2.4
-# Last updated: 2022-02-23
+# v2.5
+# Last updated: 2023-03-02
 ##############################################################################
 
-#!/bin/bash
-##############################################################################
-#
-#    Copyright (C) 2007  pronexo.com  (https://www.pronexo.com)
-#    All Rights Reserved.
-#    Author: Juan Manuel De Castro - jm@pronexo.com - pronexo@gmail.com
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-##############################################################################
-# AVISO IMPORTANTE!!! (WARNING!!!)
-# ASEGURESE DE TENER UN SERVIDOR / VPS CON AL MENOS > 2GB DE RAM
-# You must to have at least > 2GB of RAM
-# Ubuntu 18.04,LTS tested
-# v2.5
-# Last updated: 2022-02-249
-##############################################################################
 OS_NAME=$(lsb_release -cs)
 usuario=$USER
 DIR_PATH=$(pwd)
@@ -166,19 +138,6 @@ $PATHBASE/$VERSION/venv/bin/pip3 install -r $PATHBASE/$VERSION/odoo/requirements
 
 
 #cd $PATHOPT
-
-
-#if [[ ! -f "/opt/odoo13.tar.gz" ]]
-#then
-#    echo "Descargando odoo13 desde pronexo.com"
-#    sudo wget http://d13.pronexo.com/odoo13.tar.gz
-#    
-#fi
-
-#echo "descomprimiendo odoo 13 box"
-#sudo tar xvzf odoo13.tar.gz
-
-
 
 
 sudo rm /etc/systemd/system/odoo$VCODE.service
@@ -319,6 +278,57 @@ server {
 }' > /etc/nginx/sites-enabled/odoo.host" | sudo tee --append $PATHBASE/scripts/nginx-odoo-host.sh
 sudo chmod +x $PATHBASE/scripts/nginx-odoo-host.sh
 sudo sh $PATHBASE/scripts/nginx-odoo-host.sh
+
+
+
+
+#econf
+sudo touch $PATHBASE/scripts/econf
+echo "#!/bin/bash
+vim /opt/odoo13/config/odoo13.conf" | sudo tee --append $PATHBASE/scripts/econf
+sudo chmod +x $PATHBASE/scripts/econf
+
+#log
+sudo touch $PATHBASE/scripts/log
+echo "#!/bin/bash
+cat /opt/odoo13/log/odoo13-server.log" | sudo tee --append $PATHBASE/scripts/log
+sudo chmod +x $PATHBASE/scripts/log
+
+
+#restart
+sudo touch $PATHBASE/scripts/restart
+echo "#!/bin/bash
+truncate -s 0 /opt/odoo13/log/odoo13-server.log
+sudo systemctl restart odoo13
+date" | sudo tee --append $PATHBASE/scripts/restart
+sudo chmod +x $PATHBASE/scripts/restart
+
+
+#start
+sudo touch $PATHBASE/scripts/start
+echo "#!/bin/bash
+sudo systemctl start odoo13" | sudo tee --append $PATHBASE/scripts/start
+sudo chmod +x $PATHBASE/scripts/start
+
+#stop
+sudo touch $PATHBASE/scripts/stop
+echo "#!/bin/bash
+sudo systemctl stop odoo13" | sudo tee --append $PATHBASE/scripts/stop
+sudo chmod +x $PATHBASE/scripts/stop
+
+
+#status
+sudo touch $PATHBASE/scripts/status
+echo "#!/bin/bash
+systemctl status odoo13" | sudo tee --append $PATHBASE/scripts/status
+sudo chmod +x $PATHBASE/scripts/status
+
+
+#status
+sudo touch $PATHBASE/scripts/tlog
+echo "#!/bin/bash
+truncate -s 0 /opt/odoo13/log/odoo13-server.log" | sudo tee --append $PATHBASE/scripts/tlog
+sudo chmod +x $PATHBASE/scripts/tlog
 
 
 
