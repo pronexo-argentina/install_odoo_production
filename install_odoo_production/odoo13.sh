@@ -75,7 +75,7 @@ sudo apt-get  -y install git
 sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
 wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
 sudo apt-get update
-sudo apt-get -y install postgresql-14
+sudo apt-get install postgresql -y
 sudo  -u postgres  createuser -s $usuario
 
 sudo mkdir $PATHBASE
@@ -177,7 +177,8 @@ echo "Creando scripts de comandos"
 cd $DIR_PATH
 
 
-
+echo "Creando carpeta scrips"
+sudo mkdir $PATHBASE/scripts
 
 
 echo "Creando script para host odoo nginx "
