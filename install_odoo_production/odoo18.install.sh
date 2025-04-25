@@ -1,13 +1,13 @@
 #!/bin/bash
-# Copyright 2024 pronexo.com
+# Copyright 2025 pronexo.com
 # Hardware Requirements:
 #   * >=2GB RAM
 #   * >= 20GB SSD
 # Software Requirements: 
-#   * Ubuntu 22.04 LTS, Ubuntu 23.10,  Debian 12 Bookworm
-# v4.0 Production version for Odoo 17.0 Coomunity or Enterprise Edition
+#   * Ubuntu 24.04 LTS, Ubuntu 24.04,  
+# v4.0 Production version for Odoo 18.0 Coomunity or Enterprise Edition
 # See tutorial for Odoo Enterprise Integration.
-# Last updated: 2024-04-10
+# Last updated: 2025-04-25
 # step 1: Create pronexo user
 # step 2: usermod -aG sudo pronexo
 # step 3: Install script
@@ -15,15 +15,15 @@
 OS_NAME=$(lsb_release -cs)
 usuario=pronexo
 DIR_PATH=$(pwd)
-VCODE=17
-VERSION=17.0
-OCA_VERSION=17.0
+VCODE=18
+VERSION=18.0
+OCA_VERSION=18.0
 # A. Set Odoo default Port
-PORT=1769
+PORT=1869
 DEPTH=1
-# B. Set the project name (default /opt/odoo17)
+# B. Set the project name (default /opt/odoo18)
 # (Lowercase PROJECT_NAME without spaces. e.g. my_project_name_1)
-PROJECT_NAME=odoo17
+PROJECT_NAME=odoo18
 SERVICE_NAME=$PROJECT_NAME
 
 PATHBASE=/opt/$PROJECT_NAME
@@ -33,38 +33,8 @@ PATHREPOS_OCA=$PATHREPOS/oca
 # C. Set PostreSQL version:
 PG_VERSION=16
 
-wk64=""
-wk32=""
+wk64="https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6.1-2/wkhtmltox_0.12.6.1-2.jammy_amd64.deb"
 
-if [[ $OS_NAME == "bookworm" ]];
-
-then
-	wk64="https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6.1-3/wkhtmltox_0.12.6.1-3.bookworm_amd64.deb"
-
-fi
-
-if [[ $OS_NAME == "jammy" ]];
-
-then
-	wk64="https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6.1-2/wkhtmltox_0.12.6.1-2.jammy_amd64.deb"
-
-fi
-
-
-if [[ $OS_NAME == "buster"  ||  $OS_NAME == "bionic" || $OS_NAME == "focal" ]];
-
-then
-	wk64="https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox_0.12.6-1."$OS_NAME"_amd64.deb"
-	wk32="https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox_0.12.6-1."$OS_NAME"_i386.deb"
-
-fi
-
-if [[ $OS_NAME == "bullseye" ]];
-
-then
-	wk64="https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6.1-2/wkhtmltox_0.12.6.1-2."$OS_NAME"_amd64.deb"
-	wk32="https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6.1-2/wkhtmltox_0.12.6.1-2."$OS_NAME"_i386.deb"
-fi
 
 echo $wk64
 sudo useradd -m  -d $PATHBASE -s /bin/bash $usuario
@@ -150,13 +120,8 @@ sudo npm install -g less
 # Download & install WKHTMLTOPDF
 sudo rm $PATHBASE/wkhtmltox*.deb
 
-if [[ "`getconf LONG_BIT`" == "32" ]];
+sudo wget $wk64
 
-then
-	sudo wget $wk32
-else
-	sudo wget $wk64
-fi
 
 sudo dpkg -i --force-depends wkhtmltox_0.12.6*.deb
 sudo apt-get -f -y install
@@ -252,8 +217,8 @@ eof
 
 
 
-
-
+echo "Instalando vim"
+sudo apt-get -y install vim
 
 echo "Instalando nginx"
 sudo apt-get -y install nginx
@@ -369,13 +334,13 @@ sudo sh $PATHBASE/scripts/nginx-odoo-host.sh
 #econf
 sudo touch $PATHBASE/scripts/econf
 echo "#!/bin/bash
-vim /opt/odoo17/config/odoo17.conf" | sudo tee --append $PATHBASE/scripts/econf
+vim /opt/odoo18/config/odoo18.conf" | sudo tee --append $PATHBASE/scripts/econf
 sudo chmod +x $PATHBASE/scripts/econf
 
 #log
 sudo touch $PATHBASE/scripts/log
 echo "#!/bin/bash
-cat /opt/odoo17/log/odoo17-server.log" | sudo tee --append $PATHBASE/scripts/log
+cat /opt/odoo18/log/odoo18-server.log" | sudo tee --append $PATHBASE/scripts/log
 sudo chmod +x $PATHBASE/scripts/log
 
 #pconf
@@ -395,8 +360,8 @@ sudo chmod +x $PATHBASE/scripts/pconf
 #restart
 sudo touch $PATHBASE/scripts/restart
 echo "#!/bin/bash
-truncate -s 0 /opt/odoo17/log/odoo17-server.log
-sudo systemctl restart odoo17
+truncate -s 0 /opt/odoo18/log/odoo18-server.log
+sudo systemctl restart odoo18
 date" | sudo tee --append $PATHBASE/scripts/restart
 sudo chmod +x $PATHBASE/scripts/restart
 
@@ -404,27 +369,27 @@ sudo chmod +x $PATHBASE/scripts/restart
 #start
 sudo touch $PATHBASE/scripts/start
 echo "#!/bin/bash
-sudo systemctl start odoo17" | sudo tee --append $PATHBASE/scripts/start
+sudo systemctl start odoo18" | sudo tee --append $PATHBASE/scripts/start
 sudo chmod +x $PATHBASE/scripts/start
 
 #stop
 sudo touch $PATHBASE/scripts/stop
 echo "#!/bin/bash
-sudo systemctl stop odoo17" | sudo tee --append $PATHBASE/scripts/stop
+sudo systemctl stop odoo18" | sudo tee --append $PATHBASE/scripts/stop
 sudo chmod +x $PATHBASE/scripts/stop
 
 
 #status
 sudo touch $PATHBASE/scripts/status
 echo "#!/bin/bash
-systemctl status odoo17" | sudo tee --append $PATHBASE/scripts/status
+systemctl status odoo18" | sudo tee --append $PATHBASE/scripts/status
 sudo chmod +x $PATHBASE/scripts/status
 
 
 #status
 sudo touch $PATHBASE/scripts/tlog
 echo "#!/bin/bash
-truncate -s 0 /opt/odoo17/log/odoo17-server.log" | sudo tee --append $PATHBASE/scripts/tlog
+truncate -s 0 /opt/odoo18/log/odoo18-server.log" | sudo tee --append $PATHBASE/scripts/tlog
 sudo chmod +x $PATHBASE/scripts/tlog
 
 
