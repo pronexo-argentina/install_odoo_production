@@ -87,11 +87,6 @@ sudo apt-get install -y --no-install-recommends \
 
 ##################end python dependencies#####################
 
-############## PG Update and install Postgresql ##############
-# Default postgresql install package (old method)
-#sudo apt-get install postgresql postgresql-client -y
-#sudo  -u postgres  createuser -s $usuario
-############## PG Update and install Postgresql ##############
 
 ############## PG Update and install Postgresql new way ######
 sudo apt install curl ca-certificates
