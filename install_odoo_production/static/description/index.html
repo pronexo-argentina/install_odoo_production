@@ -1,62 +1,95 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE html>
-<html>
-<head><title>Instalar Odoo en segundos</title></head>
+<section style="font-family:'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#172033;max-width:1000px;margin:0 auto;">
 
-<body>
+    <!-- Hero -->
+    <img src="banner.gif" style="width:100%;border-radius:14px;display:block;margin-bottom:26px;" alt="Install Odoo Production - production-ready Odoo 18 with a tuned PostgreSQL"/>
 
-<section class="oe_container lead title_box" style="margin-top: 10px;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);text-align: center;">
-    <div class="oe_row oe_spaced">
-        <div class="oe_span12">
-            <h2 class="oe_slogan" style="color:#875A7B;">Instalar Odoo en producción en pocos pasos</h2>
-            <h3 class="oe_slogan">Este Script permite instalar odoo de forma aislada para usar en producción.</h3>
-        </div>
+    <div style="text-align:center;padding:6px 20px 10px;">
+        <h1 style="font-size:34px;color:#0a86c6;margin:0 0 12px;">Production Odoo, ready in minutes</h1>
+        <p style="font-size:18px;line-height:1.6;color:#41506a;max-width:760px;margin:0 auto;">
+            One script installs Odoo 18 with a tuned PostgreSQL, Nginx and free SSL &#8212;
+            every library in a single folder, so moving to another server is a copy away.
+        </p>
     </div>
+
+    <!-- KPI strip -->
+    <div style="text-align:center;margin:30px 0 10px;">
+        <span style="display:inline-block;background-color:#eaf5fb;color:#0a86c6;font-weight:700;font-size:15px;padding:9px 18px;border-radius:22px;margin:5px;">PostgreSQL tuned</span>
+        <span style="display:inline-block;background-color:#eaf5fb;color:#0a86c6;font-weight:700;font-size:15px;padding:9px 18px;border-radius:22px;margin:5px;">Nginx + free SSL</span>
+        <span style="display:inline-block;background-color:#eaf5fb;color:#0a86c6;font-weight:700;font-size:15px;padding:9px 18px;border-radius:22px;margin:5px;">systemd service</span>
+        <span style="display:inline-block;background-color:#eaf5fb;color:#0a86c6;font-weight:700;font-size:15px;padding:9px 18px;border-radius:22px;margin:5px;">~2-minute setup</span>
+    </div>
+
+    <!-- Features -->
+    <h2 style="font-size:26px;color:#0a86c6;text-align:center;margin:38px 0 22px;">What you get</h2>
+    <table style="width:100%; border-collapse:separate; border-spacing:16px;">
+      <tr>
+        <td style="width:33%; vertical-align:top; background-color:#f6f9fc; border-radius:14px; padding:22px;">
+            <h3 style="color:#0b1f4d;font-size:19px;margin:0 0 8px;">One command</h3>
+            <p style="font-size:15px;line-height:1.55;color:#4b5568;margin:0;">Run one script on a fresh Ubuntu 24.04 server and get a working, service-managed Odoo 18. No manual package hunting, no guesswork.</p>
+        </td>
+        <td style="width:33%; vertical-align:top; background-color:#f6f9fc; border-radius:14px; padding:22px;">
+            <h3 style="color:#0b1f4d;font-size:19px;margin:0 0 8px;">PostgreSQL tuned for your server</h3>
+            <p style="font-size:15px;line-height:1.55;color:#4b5568;margin:0;">shared_buffers, cache, work_mem, connections and parallelism are sized from the machine's RAM and cores &#8212; conservatively, so Odoo and PostgreSQL share the box without fighting over memory.</p>
+        </td>
+        <td style="width:33%; vertical-align:top; background-color:#f6f9fc; border-radius:14px; padding:22px;">
+            <h3 style="color:#0b1f4d;font-size:19px;margin:0 0 8px;">Odoo workers tuned too</h3>
+            <p style="font-size:15px;line-height:1.55;color:#4b5568;margin:0;">Worker count and memory limits are computed from the same RAM and cores, so multi-processing is on and right-sized from the very first boot.</p>
+        </td>
+      </tr>
+      <tr>
+        <td style="width:33%; vertical-align:top; background-color:#f6f9fc; border-radius:14px; padding:22px;">
+            <h3 style="color:#0b1f4d;font-size:19px;margin:0 0 8px;">Nginx reverse proxy</h3>
+            <p style="font-size:15px;line-height:1.55;color:#4b5568;margin:0;">A ready Nginx virtual host with gzip, static caching and the correct proxy headers for Odoo &#8212; longpolling included.</p>
+        </td>
+        <td style="width:33%; vertical-align:top; background-color:#f6f9fc; border-radius:14px; padding:22px;">
+            <h3 style="color:#0b1f4d;font-size:19px;margin:0 0 8px;">Free HTTPS</h3>
+            <p style="font-size:15px;line-height:1.55;color:#4b5568;margin:0;">Certbot and the Let&#39;s Encrypt plugin are installed, so a trusted SSL certificate for your domain is one command away.</p>
+        </td>
+        <td style="width:33%; vertical-align:top; background-color:#f6f9fc; border-radius:14px; padding:22px;">
+            <h3 style="color:#0b1f4d;font-size:19px;margin:0 0 8px;">One folder, easy to move</h3>
+            <p style="font-size:15px;line-height:1.55;color:#4b5568;margin:0;">Odoo, the Python venv, the config, the addons and the data all live under a single /opt folder, so migrating to another server is a copy, not a reinstall.</p>
+        </td>
+      </tr>
+      <tr>
+        <td style="width:33%; vertical-align:top; background-color:#f6f9fc; border-radius:14px; padding:22px;">
+            <h3 style="color:#0b1f4d;font-size:19px;margin:0 0 8px;">Handy shell commands</h3>
+            <p style="font-size:15px;line-height:1.55;color:#4b5568;margin:0;">start, stop, restart, status, log, econf, pconf, pgtune and workers are installed as commands, so day-to-day operations are a single word.</p>
+        </td>
+        <td style="width:33%; vertical-align:top; background-color:#f6f9fc; border-radius:14px; padding:22px;">
+            <h3 style="color:#0b1f4d;font-size:19px;margin:0 0 8px;">Weekly backup</h3>
+            <p style="font-size:15px;line-height:1.55;color:#4b5568;margin:0;">A cron job zips the whole installation folder every week, so you always have a recent snapshot to restore from.</p>
+        </td>
+        <td style="width:33%; vertical-align:top; background-color:#f6f9fc; border-radius:14px; padding:22px;">
+            <h3 style="color:#0b1f4d;font-size:19px;margin:0 0 8px;">Community or Enterprise</h3>
+            <p style="font-size:15px;line-height:1.55;color:#4b5568;margin:0;">Installs Odoo Community from the official source; drop your Enterprise addons into the extra-addons folder to run Enterprise.</p>
+        </td>
+      </tr>
+    </table>
+
+    <!-- Compatibility -->
+    <div style="text-align:center;margin:44px 0 10px;">
+        <h2 style="font-size:22px;color:#0a86c6;margin:0 0 14px;">Compatibility</h2>
+        <span style="display:inline-block;background-color:#0a86c6;color:#fff;font-weight:700;padding:8px 18px;border-radius:20px;margin:4px;">Odoo 18.0</span>
+        <span style="display:inline-block;background-color:#0a86c6;color:#fff;font-weight:700;padding:8px 18px;border-radius:20px;margin:4px;">Ubuntu 24.04 LTS</span>
+        <span style="display:inline-block;background-color:#0a86c6;color:#fff;font-weight:700;padding:8px 18px;border-radius:20px;margin:4px;">PostgreSQL 16</span>
+        <p style="font-size:15px;color:#8a93a6;margin:14px 0 0;">Built and tested for Ubuntu 24.04 LTS. Installs Odoo 18 from the official source with PostgreSQL 16, Nginx and Certbot.</p>
+    </div>
+
+    <!-- ===== FOOTER ===== -->
+    <div style="text-align:center; padding:34px 20px 14px; border-top:1px solid #e0e0e0; margin-top:40px;">
+        <img src="pronexo_logo.png" style="max-width:170px; display:block; margin:14px auto 14px;" alt="Pronexo"/>
+        <p style="color:#64748b; font-size:15px; margin:0 0 14px;">Odoo development &#183; Argentina</p>
+        <p style="margin:0 0 12px; font-size:16px;">
+            <a href="https://www.pronexo.com" style="color:#0a86c6; text-decoration:none; font-weight:700;">www.pronexo.com</a>
+            &nbsp;&#183;&nbsp;
+            <a href="mailto:soporte@pronexo.com" style="color:#0a86c6; text-decoration:none; font-weight:600;">soporte@pronexo.com</a>
+            &nbsp;&#183;&nbsp;
+            <a href="mailto:pronexo@gmail.com" style="color:#0a86c6; text-decoration:none; font-weight:600;">pronexo@gmail.com</a>
+        </p>
+        <div style="text-align:center; margin:6px 0 18px;">
+            <a href="https://www.linkedin.com/company/pronexo-com/" style="display:inline-block; width:150px; vertical-align:top; text-align:center; text-decoration:none; margin:6px 2px;"><img src="social_linkedin.png" style="width:44px; height:44px; display:block; margin:0 auto 6px;" alt="LinkedIn"/><span style="display:block; color:#334155; font-weight:700; font-size:14px;">LinkedIn</span><span style="display:block; color:#64748b; font-size:13px;">Pronexo</span></a><a href="https://www.instagram.com/pronexo.ar" style="display:inline-block; width:150px; vertical-align:top; text-align:center; text-decoration:none; margin:6px 2px;"><img src="social_instagram.png" style="width:44px; height:44px; display:block; margin:0 auto 6px;" alt="Instagram"/><span style="display:block; color:#334155; font-weight:700; font-size:14px;">Instagram</span><span style="display:block; color:#64748b; font-size:13px;">&#64;pronexo.ar</span></a><a href="https://www.facebook.com/pronexocom" style="display:inline-block; width:150px; vertical-align:top; text-align:center; text-decoration:none; margin:6px 2px;"><img src="social_facebook.png" style="width:44px; height:44px; display:block; margin:0 auto 6px;" alt="Facebook"/><span style="display:block; color:#334155; font-weight:700; font-size:14px;">Facebook</span><span style="display:block; color:#64748b; font-size:13px;">/pronexocom</span></a><a href="https://x.com/pronexoAr" style="display:inline-block; width:150px; vertical-align:top; text-align:center; text-decoration:none; margin:6px 2px;"><img src="social_x.png" style="width:44px; height:44px; display:block; margin:0 auto 6px;" alt="X"/><span style="display:block; color:#334155; font-weight:700; font-size:14px;">X</span><span style="display:block; color:#64748b; font-size:13px;">&#64;pronexoAr</span></a>
+        </div>
+        <p style="color:#94a3b8; font-size:14px; margin:8px 0 0;">Support &amp; questions welcome before and after purchase.</p>
+    </div>
+
 </section>
-
-
-
-<section class="oe_container lead title_box" style="margin-top: 10px;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);text-align: center;">
-  <div class="oe_row oe_spaced">
-    <h4 class="oe_slogan">Modo de uso</h4>
-    <div >
-        <div class="oe_row" style="margin-bottom: 72px;">
-          
-          <p class="oe_slogan" style="margin: 10px;"> Simplemente cree un usuario que se llame pronexo, luego agregue al usuario al grupo sudo de la siguiente manera:
-          # usermod -aG sudo pronexo, logueese como usuario pronexo, descargue el Script, de permisos de ejecución (chmod +x odoo17.install.sh)y comience la instalación que durará entre 2 a 10 minutos dependiendo la velocidad de su conexión a Internet!
-          </p><br/>
-          <img class="img-responsive" style="display: block;width: 95%;margin: auto;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" src="1.png"/>
-        </div>
-      </div>
-
-    
-</section>
-
-<section class="oe_container lead title_box" style="margin-top: 40px;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);text-align: center;">
-      
-      <div class="oe_row oe_spaced">
-        <div class="oe_span12">
-          <h2 class="oe_slogan title" style="margin-bottom: 10px;    background: -webkit-linear-gradient(#875A7B, #875A7B);-webkit-background-clip: text;-webkit-text-fill-color: transparent;">
-            <b> Ponerse en contacto</b>
-          </h2>
-          <hr style="width: 60rem;height: 1px;background: -webkit-gradient(linear, 0 0, 100% 0, from(#d58383), to(#5d4da6), color-stop(50%, #0b1255));"></hr>
-          <p class="oe_slogan" style="margin-bottom: 0px;margin-top: 15px;"> Obtendrá asistencia gratuita durante 60 días en caso de que haya algún error o problema. </p>
-          <div style="display: flex;margin-left: 55px;margin-bottom: 15px;">
-            <p class="oe_slogan" style="margin: 0px;margin-right: 5px;"> Para cualquier consulta o soporte contáctanos sin dudarlo
-            on</p><a  href="mailto:soporte@pronexo.com?subject=Soporte%20Instalar%20Odoo%20Script%20Auto" target="_top"> soporte@pronexo.com</a>
-          </div>
-        </div>
-        <div>
-          <a  href="mailto:soporte@pronexo.com?subject=soporte%20Instalar%20odoo" target="_top"> <i class='fa fa-envelope' style="min-width: 50px;background: #12b9af;padding: 10px;font-size: 30px;color: #ffffff;border-radius: 10px;min-height: 50px;box-shadow: 5px 8px 10px #0d4a45;"></i></a>
-          <a  href="https://www.facebook.com/pronexo.ar" target="_blank"> <i class='fa fa-facebook' style="min-width: 50px;background: #12b9af;padding: 10px;font-size: 30px;color: #ffffff;border-radius: 10px;min-height: 50px;box-shadow: 5px 8px 10px #0d4a45;"></i></a>
-          <a  href="https://github.com/pronexo-argentina" target="_blank"> <i class='fa fa-github' style="min-width: 50px;background: #12b9af;padding: 10px;font-size: 30px;color: #ffffff;border-radius: 10px;min-height: 50px;box-shadow: 5px 8px 10px #0d4a45;"></i></a>
-          <a  href="https://www.youtube.com/channel/UCDGlN78e4IKwJY59jVHrCMA" target="_blank"> <i class='fa fa-youtube' style="min-width: 50px;background: #12b9af;padding: 10px;font-size: 30px;color: #ffffff;border-radius: 10px;min-height: 50px;box-shadow: 5px 8px 10px #0d4a45;"></i></a>
-        </div>
-      </div>
-      
-      <hr style="width: 80rem;"></hr>
-      
-      <div style="min-height: 20px;"></div>
-    </section>
-</body>
-</html>

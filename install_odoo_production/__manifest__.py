@@ -1,37 +1,50 @@
 # -*- coding: utf-8 -*-
-#    Copyright (C) 2007  pronexo.com  (https://www.pronexo.com)
-#    All Rights Reserved.
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-############################################################################## # 
-# 
+# Copyright Pronexo (https://www.pronexo.com). License OPL-1.
 {
-	'name': 'Install Odoo Script',
-	'summary': 'Script that installs Odoo for production',
-	'description': 'Script that installs Odoo for production in just 2 minutes with all your libraries in a single folder',
-	'version': '17.0.4.0',
-	'author': 'Pronexo',
-	'license': 'AGPL-3',
-	'maintainer': 'Pronexo',
-	'images': ['static/description/install_odoo_home.png'],
-	'category': 'Extra Tools',
-	'website': 'https://www.pronexo.com',
-	'depends': ['base'],
-	'auto_install': False,
-	'installable': True,
-	'price': 30,
-    'currency': 'USD'
-       
+    'name': 'Install Odoo Production',
+    'summary': 'One script installs a production-ready Odoo 18 with a tuned '
+               'PostgreSQL, Nginx and free SSL',
+    'description': """
+Install Odoo Production
+=======================
+
+A single shell script that turns a fresh Ubuntu 24.04 LTS server into a
+production-ready Odoo 18 in about two minutes.
+
+What it sets up
+---------------
+* Odoo 18 from the official source, inside a Python virtualenv.
+* PostgreSQL 16, automatically tuned for the server: shared_buffers, cache,
+  work_mem, connections and parallelism are sized from the machine's RAM and
+  cores, conservatively, so Odoo and PostgreSQL share the box without fighting
+  over memory (applied with ALTER SYSTEM, fully revertible).
+* Odoo multi-processing tuned too: worker count and memory limits are computed
+  from the same RAM and cores.
+* A systemd service, so Odoo starts on boot and is managed like any service.
+* An Nginx reverse proxy (gzip, static caching, proxy headers, longpolling).
+* Certbot + Let's Encrypt, so a trusted SSL certificate is one command away.
+* Everything under a single /opt folder, so moving to another server is a copy.
+* Handy shell commands: start, stop, restart, status, log, econf, pconf,
+  pgtune and workers.
+* A weekly cron backup that zips the whole installation folder.
+
+Works with Odoo Community out of the box; add your Enterprise addons to the
+extra-addons folder to run Enterprise.
+
+By Pronexo.
+    """,
+    'version': '18.0.1.0.0',
+    'author': 'Pronexo',
+    'maintainer': 'Pronexo',
+    'website': 'https://www.pronexo.com',
+    'support': 'soporte@pronexo.com',
+    'license': 'OPL-1',
+    'category': 'Extra Tools',
+    'images': ['static/description/banner.gif'],
+    'depends': ['base'],
+    'price': 20.00,
+    'currency': 'USD',
+    'auto_install': False,
+    'installable': True,
+    'application': False,
 }
